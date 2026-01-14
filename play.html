@@ -60,6 +60,81 @@
         .hud a:hover {
             background: rgba(0, 0, 0, 0.8);
         }
+
+        .server-helper {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 30;
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            padding: 1rem;
+            border-radius: 12px;
+            width: 280px;
+            font-family: Arial, sans-serif;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .server-helper h4 {
+            margin: 0 0 0.5rem 0;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .server-helper input {
+            width: 100%;
+            background: #000;
+            border: 1px solid #444;
+            color: #0f0;
+            padding: 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+        }
+
+        .copy-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #2980b9;
+        }
+
+        .copy-btn.success {
+            background: #27ae60;
+        }
+
+        .help-text {
+            margin-top: 0.8rem;
+            color: #aaa;
+            line-height: 1.4;
+        }
+
+        .close-helper {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        /* Stealth mode for helper */
+        .server-helper.minimized {
+            transform: translateY(calc(100% - 40px));
+        }
     </style>
 </head>
 
@@ -67,6 +142,21 @@
 
     <div class="hud">
         <a href="index.html">← Back to Home</a>
+    </div>
+
+    <div class="server-helper" id="serverHelper">
+        <h4>Server Connection <span class="close-helper" onclick="toggleHelper()">−</span></h4>
+        <input type="text" id="serverUrl"
+            value="wss://fd40028c-3086-4d0f-89dd-97ab4e168125-00-13gehqoryaglz.worf.replit.dev/" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyServer()">Copy Address</button>
+        <div class="help-text">
+            <b>How to connect:</b><br>
+            1. Click "Copy Address"<br>
+            2. In game: <b>Multiplayer > Add Server</b><br>
+            3. Paste using <b>Command + V</b> (Mac)<br>
+            <br>
+            <i>Press <b>ESC</b> anytime to hide the game.</i>
+        </div>
     </div>
 
     <div class="game-container">
@@ -92,11 +182,34 @@
     </div>
 
     <script>
-        // Simple helper to try simple version if performance version 404s
-        // (Note: This is limited by CORS/Browser security, but good as a placeholder logic)
+        function copyServer() {
+            const copyText = document.getElementById("serverUrl");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value);
+
+            const btn = document.getElementById("copyBtn");
+            btn.innerText = "COPIED!";
+            btn.classList.add("success");
+            setTimeout(() => {
+                btn.innerText = "Copy Address";
+                btn.classList.remove("success");
+            }, 2000);
+        }
+
+        function toggleHelper() {
+            document.getElementById("serverHelper").classList.toggle("minimized");
+        }
+
+        // Panic Key & Focus Handling
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
         const frame = document.getElementById('gameFrame');
         frame.onerror = () => {
-            console.log("Performance version not found, trying simple version...");
             frame.src = "game.html";
         };
     </script>
