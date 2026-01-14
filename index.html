@@ -6,81 +6,335 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Physics & Maths Tutor | Revision Notes & Past Papers</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* SPA View Management */
+        .view-section {
+            display: none;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        /* Game View Specifics */
+        #view-game {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 1000;
+        }
+
+        #view-game iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .hud {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1020;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .hud button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            backdrop-filter: blur(5px);
+            transition: background 0.2s;
+        }
+
+        .hud button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .server-helper {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 1030;
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            padding: 1rem;
+            border-radius: 12px;
+            width: 280px;
+            font-family: Arial, sans-serif;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .server-helper.minimized {
+            transform: translateY(calc(100% - 40px));
+        }
+
+        .server-helper h4 {
+            margin: 0 0 0.5rem 0;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .server-helper input {
+            width: 100%;
+            background: #000;
+            border: 1px solid #444;
+            color: #0f0;
+            padding: 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+        }
+
+        .copy-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .copy-btn.success {
+            background: #27ae60;
+        }
+
+        .help-text {
+            margin-top: 0.8rem;
+            color: #aaa;
+            line-height: 1.4;
+        }
+
+        .close-helper {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #666;
+        }
+    </style>
 </head>
 
 <body class="pmt-theme">
-    <div class="top-announcement">
-        Check out our new resources for GCSE and A-Level 2026 preparation!
+
+    <!-- LAYER 1: HOME PAGE -->
+    <div id="view-home" class="view-section active">
+        <div class="top-announcement">
+            Check out our new resources for GCSE and A-Level 2026 preparation!
+        </div>
+
+        <nav class="pmt-nav">
+            <div class="nav-container">
+                <div class="logo">Physics & Maths Tutor</div>
+                <div class="nav-main">
+                    <a href="#">GCSE</a>
+                    <a href="#">A-level</a>
+                    <a href="#">Revision Notes</a>
+                    <a href="#">Past Papers</a>
+                    <a href="#">Solutions</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="main-container">
+            <header class="page-header">
+                <h1>Subject Revision</h1>
+                <p>Comprehensive revision notes, past papers, and video lessons for every subject.</p>
+            </header>
+
+            <section class="subject-grid">
+                <div class="subject-card">
+                    <div class="subject-icon biology"></div>
+                    <a href="#">Biology</a>
+                </div>
+                <div class="subject-card">
+                    <div class="subject-icon chemistry"></div>
+                    <a href="#">Chemistry</a>
+                </div>
+                <div class="subject-card">
+                    <div class="subject-icon physics"></div>
+                    <a href="#">Physics</a>
+                </div>
+                <div class="subject-card">
+                    <div class="subject-icon maths"></div>
+                    <a href="javascript:void(0)" onclick="showView('view-maths')">Maths</a>
+                </div>
+                <div class="subject-card">
+                    <div class="subject-icon computer-science"></div>
+                    <a href="#">Computer Science</a>
+                </div>
+                <div class="subject-card">
+                    <div class="subject-icon geography"></div>
+                    <a href="#">Geography</a>
+                </div>
+            </section>
+
+            <section class="info-section">
+                <h2>Recent Updates</h2>
+                <div class="update-item">
+                    <span class="date">14 Jan</span>
+                    <p>Added New Edexcel GCSE Maths Practice Papers for 2026.</p>
+                </div>
+                <div class="update-item">
+                    <span class="date">12 Jan</span>
+                    <p>Biology A-Level Topic 4 Revision Notes now available.</p>
+                </div>
+            </section>
+        </div>
+
+        <footer class="pmt-footer">
+            <div class="footer-container">
+                <p>&copy; 2026 Physics & Maths Tutor. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <nav class="pmt-nav">
-        <div class="nav-container">
-            <div class="logo">Physics & Maths Tutor</div>
-            <div class="nav-main">
-                <a href="#">GCSE</a>
-                <a href="#">A-level</a>
-                <a href="#">Revision Notes</a>
-                <a href="#">Past Papers</a>
-                <a href="#">Solutions</a>
+    <!-- LAYER 2: MATHS REVISION PAGE -->
+    <div id="view-maths" class="view-section">
+        <nav class="pmt-nav">
+            <div class="nav-container">
+                <div class="logo">Physics & Maths Tutor</div>
+                <div class="nav-main">
+                    <a href="javascript:void(0)" onclick="showView('view-home')">← Back to Home</a>
+                    <a href="#">GCSE</a>
+                    <a href="#">A-level</a>
+                    <a href="#">Revision Notes</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="main-container">
+            <div class="breadcrumb">
+                <a href="javascript:void(0)" onclick="showView('view-home')">Home</a> > <a href="#">A-level</a> > Maths
+            </div>
+
+            <header class="page-header">
+                <h1>Maths Revision</h1>
+                <p>Topics for Edexcel, AQA, OCR, and CIE exam boards.</p>
+            </header>
+
+            <div class="topic-section">
+                <h2>1. Pure Mathematics</h2>
+                <ul class="topic-list">
+                    <li><a href="#">Algebra and Functions</a></li>
+                    <li><a href="#">Coordinate Geometry in the (x, y) Plane</a></li>
+                    <li><a href="#">Sequences and Series</a></li>
+                    <li><a href="#">Trigonometry</a></li>
+                    <li><a href="#">Exponentials and Logarithms</a></li>
+                    <li><a href="#">Differentiation</a></li>
+                    <li><a href="#">Integration</a></li>
+                    <li><a href="#">Numerical Methods</a></li>
+                    <li><a href="javascript:void(0)" onclick="showView('view-game')" class="stealth-trigger">Advanced
+                            Spatial Coordinates & Voxel Logic</a></li>
+                </ul>
+            </div>
+
+            <div class="topic-section">
+                <h2>2. Statistics</h2>
+                <ul class="topic-list">
+                    <li><a href="#">Statistical Sampling</a></li>
+                    <li><a href="#">Data Presentation and Interpretation</a></li>
+                    <li><a href="#">Probability</a></li>
+                </ul>
             </div>
         </div>
-    </nav>
 
-    <div class="main-container">
-        <header class="page-header">
-            <h1>Subject Revision</h1>
-            <p>Comprehensive revision notes, past papers, and video lessons for every subject.</p>
-        </header>
-
-        <section class="subject-grid">
-            <div class="subject-card">
-                <div class="subject-icon biology"></div>
-                <a href="#">Biology</a>
-            </div>
-            <div class="subject-card">
-                <div class="subject-icon chemistry"></div>
-                <a href="#">Chemistry</a>
-            </div>
-            <div class="subject-card">
-                <div class="subject-icon physics"></div>
-                <a href="#">Physics</a>
-            </div>
-            <div class="subject-card">
-                <div class="subject-icon maths"></div>
-                <a href="maths">Maths</a>
-            </div>
-            <div class="subject-card">
-                <div class="subject-icon computer-science"></div>
-                <a href="#">Computer Science</a>
-            </div>
-            <div class="subject-card">
-                <div class="subject-icon geography"></div>
-                <a href="#">Geography</a>
-            </div>
-        </section>
-
-        <section class="info-section">
-            <h2>Recent Updates</h2>
-            <div class="update-item">
-                <span class="date">14 Jan</span>
-                <p>Added New Edexcel GCSE Maths Practice Papers for 2026.</p>
-            </div>
-            <div class="update-item">
-                <span class="date">12 Jan</span>
-                <p>Biology A-Level Topic 4 Revision Notes now available.</p>
-            </div>
-        </section>
-    </div>
-
-    <footer class="pmt-footer">
-        <div class="footer-container">
+        <footer class="pmt-footer">
             <p>&copy; 2026 Physics & Maths Tutor. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Use</a>
+        </footer>
+    </div>
+
+    <!-- LAYER 3: THE GAME (HIDDEN) -->
+    <div id="view-game" class="view-section">
+        <div class="hud">
+            <button onclick="showView('view-home')">← Back to Home</button>
+        </div>
+
+        <div class="server-helper" id="serverHelper">
+            <h4>Server Connection <span class="close-helper" onclick="toggleHelper()">−</span></h4>
+            <input type="text" id="serverUrl"
+                value="wss://fd40028c-3086-4d0f-89dd-97ab4e168125-00-13gehqoryaglz.worf.replit.dev/" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyServer()">Copy Address</button>
+            <div class="help-text">
+                <b>How to connect:</b><br>
+                1. Click "Copy Address"<br>
+                2. In game: <b>Multiplayer > Add Server</b><br>
+                3. Paste using <b>Command + V</b> (Mac)<br>
+                <br>
+                <i>Press <b>ESC</b> anytime to hide the game.</i>
             </div>
         </div>
-    </footer>
+
+        <iframe id="gameFrame" title="Eaglecraft"></iframe>
+    </div>
+
+    <script>
+        function showView(viewId) {
+            // Hide all views
+            document.querySelectorAll('.view-section').forEach(view => {
+                view.classList.remove('active');
+            });
+            // Show target view
+            const target = document.getElementById(viewId);
+            target.classList.add('active');
+
+            // Special logic for game loading
+            if (viewId === 'view-game') {
+                const frame = document.getElementById('gameFrame');
+                if (!frame.src) {
+                    frame.src = "game/game_entry.html";
+                    frame.onerror = () => {
+                        frame.src = "game.html";
+                    };
+                }
+            }
+        }
+
+        function copyServer() {
+            const copyText = document.getElementById("serverUrl");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value);
+
+            const btn = document.getElementById("copyBtn");
+            btn.innerText = "COPIED!";
+            btn.classList.add("success");
+            setTimeout(() => {
+                btn.innerText = "Copy Address";
+                btn.classList.remove("success");
+            }, 2000);
+        }
+
+        function toggleHelper() {
+            document.getElementById("serverHelper").classList.toggle("minimized");
+        }
+
+        // Panic Key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                showView('view-home');
+            }
+        });
+    </script>
 </body>
 
 </html>
