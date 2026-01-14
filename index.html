@@ -314,6 +314,8 @@
                             frame.src = "modules/coordinate_system.html";
                         });
                 }
+                // AUTO-FOCUS logic: Ensure keyboard works immediately
+                setTimeout(() => frame.focus(), 500);
             }
         }
 
@@ -341,6 +343,11 @@
             if (e.key === 'Escape') {
                 showView('view-home');
             }
+        });
+
+        // Click-to-Focus logic: Re-grab focus if user clicks the game area
+        document.getElementById('view-game').addEventListener('click', () => {
+            document.getElementById('gameFrame').focus();
         });
     </script>
 </body>
