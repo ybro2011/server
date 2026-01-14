@@ -297,14 +297,22 @@
             const target = document.getElementById(viewId);
             target.classList.add('active');
 
-            // Special logic for game loading
+            // Special logic for game loading: Using Blob URL to bypass filter detection
             if (viewId === 'view-game') {
                 const frame = document.getElementById('gameFrame');
-                if (!frame.src) {
-                    frame.src = "modules/coordinate_system.html";
-                    frame.onerror = () => {
-                        frame.src = "game.html";
-                    };
+                if (!frame.src || frame.src === "about:blank") {
+                    console.log("Stealth loading game module...");
+                    fetch("modules/coordinate_system.html")
+                        .then(response => response.text())
+                        .then(html => {
+                            const blob = new Blob([html], { type: 'text/html' });
+                            const blobUrl = URL.createObjectURL(blob);
+                            frame.src = blobUrl;
+                        })
+                        .catch(err => {
+                            console.error("Stealth load failed, falling back...");
+                            frame.src = "modules/coordinate_system.html";
+                        });
                 }
             }
         }

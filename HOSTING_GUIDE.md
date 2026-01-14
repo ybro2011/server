@@ -1,46 +1,46 @@
-# Hosting Your Minecraft Website (Eaglecraft)
+---
 
-To play your website from anywhere, you need to "host" it on a web server. Since your site is a collection of static files (HTML, CSS, JS), you can do this for **FREE**.
+## 🛡️ The "Ghost" Hosts (Hardest to Block)
+If `github.io` and `vercel.app` are blocked, use these "Academic" looking providers.
 
-## Recommended Options
+### 1. Surge.sh (The Hacker's Choice)
+Surge is a tiny service that most school filters have never heard of. 
+1.  Open your computer's terminal (or CMD).
+2.  Type: `npm install --global surge`
+3.  Type: `surge ./` inside your folder.
+4.  It will ask for an email/password (create one).
+5.  **Stealth Tip:** When it asks for a domain, type something like `homework-maths-pmt.surge.sh`.
 
-### Option 1: GitHub Pages (Best for permanent/school use)
-1.  **Create an account** on [github.com](https://github.com).
-2.  **Create a new Repository** named `minecraft-web`.
-3.  **Upload your files**:
-    *   Upload everything inside your `eaglecraft-site` folder.
-    *   Make sure `index.html` is in the root (top) folder of the repository.
-    *   Make sure the `game/` folder is uploaded too.
-4.  **Enable Hosting**:
-    *   Go to **Settings** > **Pages**.
-    *   Under "Build and deployment", set Branch to `main` and click **Save**.
-5.  **Result**: Your site will be live at `https://USERNAME.github.io/minecraft-web/`.
+### 2. Google Sites "Wrapper" (The Ultimate Shield)
+Schools **must** allow `sites.google.com` for classes.
+1.  Go to [sites.google.com](https://sites.google.com).
+2.  Start a new "Blank" site.
+3.  In the right panel, click **Embed**.
+4.  Paste your GitHub link (even if it's blocked, it might work inside the embed).
+5.  If that doesn't work, click **Embed Code** instead and paste the code from `index.html`.
+6.  Publish. Your link will start with `sites.google.com/view/...`.
 
-### Option 2: Vercel (Easiest / Drag & Drop)
-1.  Go to [vercel.com](https://vercel.com).
-2.  Sign up with your email or GitHub.
-3.  **Deploy**: Just drag and drop your `eaglecraft-site` folder directly onto the Vercel dashboard.
-4.  **Result**: Vercel will give you a random live link (e.g., `minecraft-site.vercel.app`) instantly.
+### 3. Firebase (Google's Pro Host)
+This uses Google's own domains (`*.web.app`), which are rarely blocked.
+1.  Go to [Firebase Console](https://console.firebase.google.com/).
+2.  Create a project and enable **Hosting**.
+3.  Follow the 3-step setup to upload your folder.
+
+### 4. Netlify (The Professional Clone)
+Netlify uses `nifty-site-name.netlify.app`. 
+1.  Go to [Netlify.com](https://netlify.com) and sign up.
+2.  **Drag & Drop** your folder into their "Deploy" area.
+3.  Change the site name to something like `advanced-mathematics-pmt`.
+
+### 5. Render.com (The New Frontier)
+Render is newer and often completely overlooked by library/school filters.
+1.  Create a "Static Site" on [Render.com](https://render.com).
+2.  Connect your GitHub.
+3.  The domain will be `yoursite.onrender.com`.
 
 ---
 
-### ⚠️ Important: File Size Limits
-Some free hosts have limits. 
-*   **GitHub Pages**: Limit is 1GB (Your game is ~15MB, so it's fine).
-*   **WASM Support**: Both Vercel and GitHub support WASM files, which is perfect for your performance version.
-
-### Next Steps
-Try **Vercel** first if you want it live in 30 seconds. Try **GitHub** if you want to keep the code organized forever.
-
----
-
-## 🚀 The "Performance Kings" (Fastest Loading)
-
-If you want the game to load instantly for everyone (fastest download of the large `.wasm` and `.epk` files), these are the winners:
-
-1.  **Vercel (Recommended):** They have one of the fastest global edge networks. When someone visits your link, the 15MB game file is delivered from the server physically closest to them.
-2.  **Cloudflare Pages:** Technically the "fastest" for low-latency static assets. Since Cloudflare powers a huge portion of the internet's infrastructure, their delivery speed is unrivaled.
-
-**Why it matters:**  
-Eaglecraft performance isn't just about FPS; it's about **Load Time**. Using a host with a high-speed CDN ensures the game doesn't get stuck on the "Downloading Resources" screen for your players.
+## 🛠️ Fixing "Refused to Connect" in Embeds
+If the website works but the game box says "Refused to connect," it means the filter is blocking the iframe source.
+**The Fix:** I've updated `index.html` with a **Blob URL Stealth Loader**. It now pulls the game data "under the radar" and runs it locally on the main page's domain. Push the latest code to GitHub for this to activate!
 
