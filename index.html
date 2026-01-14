@@ -4,58 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSprint | Advanced Revision Hub</title>
+    <title>Physics & Maths Tutor | Revision Notes & Past Papers</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="study-theme">
-    <nav class="study-nav">
-        <div class="logo">EduSprint</div>
-        <div class="nav-links">
-            <a href="#">Resources</a>
-            <a href="#">Past Papers</a>
-            <a href="#">Contact</a>
+<body class="pmt-theme">
+    <div class="top-announcement">
+        Check out our new resources for GCSE and A-Level 2026 preparation!
+    </div>
+
+    <nav class="pmt-nav">
+        <div class="nav-container">
+            <div class="logo">Physics & Maths Tutor</div>
+            <div class="nav-main">
+                <a href="#">GCSE</a>
+                <a href="#">A-level</a>
+                <a href="#">Revision Notes</a>
+                <a href="#">Past Papers</a>
+                <a href="#">Solutions</a>
+            </div>
         </div>
     </nav>
 
-    <header class="study-header">
-        <h1>Welcome back, Scholar</h1>
-        <p>Your personalized dashboard for peak academic performance.</p>
-    </header>
+    <div class="main-container">
+        <header class="page-header">
+            <h1>Subject Revision</h1>
+            <p>Comprehensive revision notes, past papers, and video lessons for every subject.</p>
+        </header>
 
-    <main class="study-grid">
-        <div class="revision-card" onclick="window.location.href='#'">
-            <div class="icon-wrap science"></div>
-            <h3>Physics & Chemistry</h3>
-            <p>Master the laws of the universe with interactive modules.</p>
-            <span class="btn-study">Review Material</span>
+        <section class="subject-grid">
+            <div class="subject-card">
+                <div class="subject-icon biology"></div>
+                <a href="#">Biology</a>
+            </div>
+            <div class="subject-card">
+                <div class="subject-icon chemistry"></div>
+                <a href="#">Chemistry</a>
+            </div>
+            <div class="subject-card">
+                <div class="subject-icon physics"></div>
+                <a href="#">Physics</a>
+            </div>
+            <div class="subject-card">
+                <div class="subject-icon maths"></div>
+                <a href="maths.html">Maths</a>
+            </div>
+            <div class="subject-card">
+                <div class="subject-icon computer-science"></div>
+                <a href="#">Computer Science</a>
+            </div>
+            <div class="subject-card">
+                <div class="subject-icon geography"></div>
+                <a href="#">Geography</a>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Recent Updates</h2>
+            <div class="update-item">
+                <span class="date">14 Jan</span>
+                <p>Added New Edexcel GCSE Maths Practice Papers for 2026.</p>
+            </div>
+            <div class="update-item">
+                <span class="date">12 Jan</span>
+                <p>Biology A-Level Topic 4 Revision Notes now available.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer class="pmt-footer">
+        <div class="footer-container">
+            <p>&copy; 2026 Physics & Maths Tutor. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+            </div>
         </div>
-
-        <div class="revision-card" onclick="window.location.href='play.html'">
-            <div class="icon-wrap math"></div>
-            <h3>Pure Mathematics</h3>
-            <p>Advanced calculus and algebraic theory preparation.</p>
-            <span class="btn-study">Solve Equations</span>
-        </div>
-
-        <div class="revision-card" onclick="window.location.href='#'">
-            <div class="icon-wrap history"></div>
-            <h3>World History</h3>
-            <p>Exploring the civilizations that shaped our modern world.</p>
-            <span class="btn-study">Start Reading</span>
-        </div>
-
-        <div class="revision-card" onclick="window.location.href='#'">
-            <div class="icon-wrap productivity"></div>
-            <h3>Study Planner</h3>
-            <p>Optimize your schedule for upcoming examinations.</p>
-            <span class="btn-study">Open Planner</span>
-        </div>
-    </main>
-
-    <footer class="study-footer">
-        <p>&copy; 2026 EduSprint Education Foundation. All rights reserved.</p>
     </footer>
 </body>
 
