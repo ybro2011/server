@@ -1,13 +1,12 @@
 :root {
-    --bg-dark: #0f172a;
-    --bg-card: #1e293b;
-    --primary: #10b981;
-    --primary-glow: rgba(16, 185, 129, 0.5);
-    --secondary: #3b82f6;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --font-heading: 'Outfit', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    /* Academic Theme Colors */
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --bg-main: #f8fafc;
+    --text-dark: #1e293b;
+    --text-light: #64748b;
+    --card-bg: #ffffff;
+    --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 * {
@@ -16,254 +15,167 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: var(--bg-dark);
-    color: var(--text-main);
-    font-family: var(--font-body);
-    overflow-x: hidden;
-    min-height: 100vh;
+body.study-theme {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    background-color: var(--bg-main);
+    color: var(--text-dark);
 }
 
-/* Background Effect */
-.background-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 40%);
-    z-index: -1;
-}
-
-/* Navbar */
-.navbar {
+/* Navigation */
+.study-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 5%;
-    backdrop-filter: blur(10px);
-    position: fixed;
-    width: 100%;
-    z-index: 100;
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
 }
 
-.logo {
-    font-family: var(--font-heading);
+.study-nav .logo {
     font-size: 1.5rem;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-}
-
-.highlight {
+    font-weight: 700;
     color: var(--primary);
+    letter-spacing: -0.5px;
 }
 
 .nav-links a {
-    color: var(--text-muted);
     text-decoration: none;
+    color: var(--text-light);
     margin-left: 2rem;
-    font-weight: 600;
-    transition: color 0.3s;
+    font-weight: 500;
+    transition: color 0.2s;
 }
 
-.nav-links a:hover, .nav-links a.active {
-    color: var(--text-main);
+.nav-links a:hover {
+    color: var(--primary);
 }
 
-/* Hero Section */
-.hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15vh 5% 5rem;
-    min-height: 100vh;
+/* Header */
+.study-header {
+    text-align: center;
+    padding: 4rem 5% 3rem;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.hero-content {
-    max-width: 600px;
-}
-
-h1 {
-    font-family: var(--font-heading);
-    font-size: 4.5rem;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-}
-
-.gradient-text {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-p {
-    color: var(--text-muted);
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-bottom: 2.5rem;
-    max-width: 480px;
-}
-
-/* Buttons */
-.buttons {
-    display: flex;
-    gap: 1rem;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 1rem 2rem;
-    border-radius: 12px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.btn-primary {
-    background: var(--primary);
-    color: #fff;
-    box-shadow: 0 4px 20px var(--primary-glow);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px var(--primary-glow);
-}
-
-.btn-secondary {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-main);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.arrow {
-    margin-left: 0.5rem;
-}
-
-/* 3D Cube Animation */
-.hero-visual {
-    perspective: 1000px;
-}
-
-.cube-container {
-    width: 200px;
-    height: 200px;
-}
-
-.cube {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    animation: rotate 10s infinite linear;
-}
-
-.face {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border: 2px solid var(--primary);
-    background: rgba(16, 185, 129, 0.1);
-    box-shadow: 0 0 20px var(--primary-glow);
-}
-
-.front  { transform: rotateY(0deg) translateZ(100px); }
-.back   { transform: rotateY(180deg) translateZ(100px); }
-.right  { transform: rotateY(90deg) translateZ(100px); }
-.left   { transform: rotateY(-90deg) translateZ(100px); }
-.top    { transform: rotateX(90deg) translateZ(100px); }
-.bottom { transform: rotateX(-90deg) translateZ(100px); }
-
-@keyframes rotate {
-    from { transform: rotateX(0) rotateY(0); }
-    to { transform: rotateX(360deg) rotateY(360deg); }
-}
-
-/* Features */
-.features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    padding: 4rem 5%;
-}
-
-.feature-card {
-    background: var(--bg-card);
-    padding: 2rem;
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: transform 0.3s;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-}
-
-.icon {
-    font-size: 2rem;
+.study-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-dark);
     margin-bottom: 1rem;
 }
 
-h3 {
-    margin-bottom: 0.5rem;
-    font-family: var(--font-heading);
+.study-header p {
+    color: var(--text-light);
+    font-size: 1.125rem;
 }
 
-.feature-card p {
-    font-size: 1rem;
-    margin: 0;
+/* Grid Layout */
+.study-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem 5% 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Card Styling */
+.revision-card {
+    background: var(--card-bg);
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid #f1f5f9;
+}
+
+.revision-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.icon-wrap {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+    background-image: url('study-icons.png');
+    background-size: 240px 240px;
+    /* 2x2 grid */
+}
+
+/* Sprite positions based on the generated image 2x2 layout */
+.science {
+    background-position: -120px 0px;
+}
+
+.math {
+    background-position: 0px 0px;
+}
+
+.history {
+    background-position: 0px -120px;
+}
+
+.productivity {
+    background-position: -120px -120px;
+}
+
+.revision-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.revision-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn-study {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    color: white;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: background 0.2s;
+}
+
+.revision-card:hover .btn-study {
+    background: var(--primary-hover);
 }
 
 /* Footer */
-.footer {
+.study-footer {
     text-align: center;
-    padding: 2rem;
-    color: var(--text-muted);
-    font-size: 0.9rem;
+    padding: 3rem;
+    color: var(--text-light);
+    font-size: 0.875rem;
+    border-top: 1px solid #e2e8f0;
 }
 
-/* Animations */
-.animate-up {
-    opacity: 0;
-    animation: fadeInUp 0.8s forwards;
+/* Game Page Overrides (Keep clean) */
+#game-frame {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    display: block;
 }
 
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding-top: 8rem;
-    }
-    
-    .hero-content {
-        margin-bottom: 4rem;
-    }
-
-    h1 {
-        font-size: 3rem;
-    }
-
-    .buttons {
-        justify-content: center;
-    }
-
-    .hero-visual {
-        display: none; /* Hide cube on mobile for space */
-    }
+.game-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--primary);
+    z-index: 1000;
+    opacity: 0.2;
+    /* Subtle indicator it's still "EduSprint" themed */
 }

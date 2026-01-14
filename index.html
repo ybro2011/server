@@ -1,69 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eaglecraft Web</title>
+    <title>EduSprint | Advanced Revision Hub</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="background-overlay"></div>
-    
-    <nav class="navbar">
-        <div class="logo">Eaglecraft<span class="highlight">Web</span></div>
+
+<body class="study-theme">
+    <nav class="study-nav">
+        <div class="logo">EduSprint</div>
         <div class="nav-links">
-            <a href="#" class="active">Home</a>
-            <a href="#features">Features</a>
-            <a href="https://github.com/LAX1DUDE/eaglercraft" target="_blank">Source</a>
+            <a href="#">Resources</a>
+            <a href="#">Past Papers</a>
+            <a href="#">Contact</a>
         </div>
     </nav>
 
-    <main class="hero">
-        <div class="hero-content">
-            <h1 class="animate-up">Minecraft in your<br><span class="gradient-text">Browser</span></h1>
-            <p class="animate-up delay-1">Play the classic Minecraft 1.8 experience directly on the web. No downloads, no installation, just pure block-building fun.</p>
-            <div class="buttons animate-up delay-2">
-                <a href="play.html" class="btn btn-primary">Play Now <span class="arrow">→</span></a>
-                <a href="#setup" class="btn btn-secondary">How to Setup</a>
-            </div>
+    <header class="study-header">
+        <h1>Welcome back, Scholar</h1>
+        <p>Your personalized dashboard for peak academic performance.</p>
+    </header>
+
+    <main class="study-grid">
+        <div class="revision-card" onclick="window.location.href='#'">
+            <div class="icon-wrap science"></div>
+            <h3>Physics & Chemistry</h3>
+            <p>Master the laws of the universe with interactive modules.</p>
+            <span class="btn-study">Review Material</span>
         </div>
-        <div class="hero-visual animate-up delay-1">
-            <div class="cube-container">
-                <div class="cube">
-                    <div class="face front"></div>
-                    <div class="face back"></div>
-                    <div class="face right"></div>
-                    <div class="face left"></div>
-                    <div class="face top"></div>
-                    <div class="face bottom"></div>
-                </div>
-            </div>
+
+        <div class="revision-card" onclick="window.location.href='play.html'">
+            <div class="icon-wrap math"></div>
+            <h3>Pure Mathematics</h3>
+            <p>Advanced calculus and algebraic theory preparation.</p>
+            <span class="btn-study">Solve Equations</span>
+        </div>
+
+        <div class="revision-card" onclick="window.location.href='#'">
+            <div class="icon-wrap history"></div>
+            <h3>World History</h3>
+            <p>Exploring the civilizations that shaped our modern world.</p>
+            <span class="btn-study">Start Reading</span>
+        </div>
+
+        <div class="revision-card" onclick="window.location.href='#'">
+            <div class="icon-wrap productivity"></div>
+            <h3>Study Planner</h3>
+            <p>Optimize your schedule for upcoming examinations.</p>
+            <span class="btn-study">Open Planner</span>
         </div>
     </main>
 
-    <section id="features" class="features">
-        <div class="feature-card">
-            <div class="icon">⚡</div>
-            <h3>Instant Play</h3>
-            <p>Load up and play in seconds. Optimized for web performance.</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">🎮</div>
-            <h3>Multiplayer</h3>
-            <p>Join servers and play with friends online.</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">🔓</div>
-            <h3>Unlocked</h3>
-            <p>Play on school or work networks securely.</p>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <p>This is a fan project. Not affiliated with Mojang or Microsoft.</p>
+    <footer class="study-footer">
+        <p>&copy; 2026 EduSprint Education Foundation. All rights reserved.</p>
     </footer>
 </body>
+
 </html>
