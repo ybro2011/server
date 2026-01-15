@@ -269,46 +269,28 @@
                 alert("Please allow popups for 'Revision Mode' to work correctly!");
                 return;
             }
+
+            // Clone the entire page HTML
+            const html = document.documentElement.outerHTML;
             const currentUrl = window.location.href;
-            const html = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Revision Notes | Physics & Maths Tutor</title>
-                    <link rel="icon" type="image/x-icon" href="https://www.physicsandmathstutor.com/favicon.ico">
-                    <style>
-                        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #fff; } 
-                        iframe { width: 100%; height: 100%; border: none; }
-                    </style>
-                    <script>
-                        let lastK = 0;
-                        function triggerPanic() {
-                            window.onbeforeunload = null;
-                            window.open('https://teams.microsoft.com', '_blank');
-                            window.location.replace('https://www.bbc.co.uk/bitesize');
-                            setTimeout(() => { try { window.close(); } catch(e){} }, 500);
-                        }
-                        window.addEventListener('keydown', (e) => {
-                            if (e.key.toLowerCase() === 'k') {
-                                const now = Date.now();
-                                if (now - lastK < 500) triggerPanic();
-                                lastK = now;
-                            }
-                            if (e.key === 'Escape') triggerPanic();
-                        });
-                    <\\/script>
-                </head>
-                <body><iframe src="${currentUrl}" style="width:100%; height:100%; border:none;"></iframe></body>
-                </html>`;
+
+            // Write the clone to the new window
             win.document.open();
             win.document.write(html);
             win.document.close();
 
-            // INCREASED TIMEOUT: Give the new tab time to start loading the iframe
-            // before the original tab redirects away.
+            // Inject <base> tag to fix relative assets (css, modules, assets)
+            const base = win.document.createElement('base');
+            base.href = currentUrl;
+            win.document.head.prepend(base);
+
+            // Ensure title/favicon remain stealthy (sometimes writing HTML resets them)
+            win.document.title = "Revision Notes | Physics & Maths Tutor";
+
+            // Redirect original tab to Bitesize
             setTimeout(() => {
-                window.location.replace('https://www.bbc.co.uk/bitesize');
-            }, 750);
+                window.top.location.replace('https://www.bbc.co.uk/bitesize');
+            }, 1000);
         }
 
         function copyServer() {
