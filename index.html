@@ -212,6 +212,25 @@
     <script>
         let lastKPress = 0;
 
+        // Centralized Panic function to avoid triggers and prompts
+        function triggerPanic() {
+            // Suppress "Leave site?" prompts
+            window.onbeforeunload = null;
+            if (window.top) window.top.onbeforeunload = null;
+
+            // Open Teams as a decoy
+            window.open('https://teams.microsoft.com', '_blank');
+
+            // Redirect current tab to Bitesize
+            window.top.location.replace('https://www.bbc.co.uk/bitesize');
+
+            // Attempt to close window (only works if tab was opened via script)
+            try {
+                if (window !== window.top) window.top.close();
+                window.close();
+            } catch (e) { }
+        }
+
         function showView(viewId) {
             document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
@@ -263,19 +282,19 @@
                     </style>
                     <script>
                         let lastK = 0;
+                        function triggerPanic() {
+                            window.onbeforeunload = null;
+                            window.open('https://teams.microsoft.com', '_blank');
+                            window.location.replace('https://www.bbc.co.uk/bitesize');
+                            setTimeout(() => { try { window.close(); } catch(e){} }, 500);
+                        }
                         window.addEventListener('keydown', (e) => {
                             if (e.key.toLowerCase() === 'k') {
                                 const now = Date.now();
-                                if (now - lastK < 500) {
-                                    window.open('https://teams.microsoft.com', '_blank');
-                                    window.location.replace('https://www.bbc.co.uk/bitesize');
-                                    setTimeout(() => window.close(), 500);
-                                }
+                                if (now - lastK < 500) triggerPanic();
                                 lastK = now;
                             }
-                            if (e.key === 'Escape') {
-                                window.location.replace('https://www.bbc.co.uk/bitesize');
-                            }
+                            if (e.key === 'Escape') triggerPanic();
                         });
                     <\\/script>
                 </head>
@@ -306,24 +325,14 @@
         window.addEventListener('keydown', (e) => {
             // Permanent Escape Panic
             if (e.key === 'Escape') {
-                window.top.location.replace('https://www.bbc.co.uk/bitesize');
+                triggerPanic();
             }
 
             // Double-K Panic
             if (e.key.toLowerCase() === 'k') {
                 const now = Date.now();
                 if (now - lastKPress < 500) {
-                    window.open('https://teams.microsoft.com', '_blank');
-                    window.top.location.replace('https://www.bbc.co.uk/bitesize');
-                    setTimeout(() => {
-                        try {
-                            if (window !== window.top) {
-                                window.top.close();
-                            } else {
-                                window.close();
-                            }
-                        } catch (err) { }
-                    }, 500);
+                    triggerPanic();
                 }
                 lastKPress = now;
             }
