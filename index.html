@@ -171,7 +171,7 @@
     <!-- VIEW: THE GAME (SECRET) -->
     <div id="view-game" class="view-section">
         <div class="hud">
-            <button onclick="window.location.replace('https://www.bbc.co.uk/bitesize')">← EXIT STUDY MODE</button>
+            <button onclick="window.top.location.replace('https://www.bbc.co.uk/bitesize')">← EXIT STUDY MODE</button>
         </div>
 
         <div class="server-helper" id="serverHelper"
@@ -304,16 +304,26 @@
         }
 
         window.addEventListener('keydown', (e) => {
+            // Permanent Escape Panic
             if (e.key === 'Escape') {
-                window.location.replace('https://www.bbc.co.uk/bitesize');
+                window.top.location.replace('https://www.bbc.co.uk/bitesize');
             }
 
+            // Double-K Panic
             if (e.key.toLowerCase() === 'k') {
                 const now = Date.now();
                 if (now - lastKPress < 500) {
                     window.open('https://teams.microsoft.com', '_blank');
-                    window.location.replace('https://www.bbc.co.uk/bitesize');
-                    setTimeout(() => { try { window.close(); } catch (err) { } }, 500);
+                    window.top.location.replace('https://www.bbc.co.uk/bitesize');
+                    setTimeout(() => {
+                        try {
+                            if (window !== window.top) {
+                                window.top.close();
+                            } else {
+                                window.close();
+                            }
+                        } catch (err) { }
+                    }, 500);
                 }
                 lastKPress = now;
             }
