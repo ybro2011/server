@@ -175,15 +175,45 @@
         </div>
 
         <div class="server-helper" id="serverHelper"
-            style="position: fixed; bottom: 1rem; right: 1rem; z-index: 1030; background: rgba(20, 20, 20, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); color: #ccc; padding: 1rem; border-radius: 12px; width: 280px;">
-            <h4>Server Connection <span class="close-helper" onclick="toggleHelper()"
-                    style="cursor:pointer; float:right;">−</span></h4>
-            <input type="text" id="serverUrl"
-                value="wss://fd40028c-3086-4d0f-89dd-97ab4e168125-00-13gehqoryaglz.worf.replit.dev/" readonly
-                style="width:100%; margin: 10px 0; background:#000; color:#0f0; border:1px solid #444; padding:5px;">
-            <button class="copy-btn" id="copyBtn" onclick="copyServer()"
-                style="width:100%; padding:10px; background:#3498db; color:#fff; border:none; cursor:pointer;">Copy
-                Address</button>
+            style="position: fixed; bottom: 1rem; right: 1rem; z-index: 1030; background: rgba(20, 20, 20, 0.95); border: 1px solid rgba(255, 255, 255, 0.1); color: #ccc; padding: 1.2rem; border-radius: 12px; width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <h4 style="margin-bottom: 10px; color: #fff;">1.12.2 Server List <span class="close-helper"
+                    onclick="toggleHelper()" style="cursor:pointer; float:right;">−</span></h4>
+
+            <div style="font-size: 0.85rem; margin-bottom: 15px; color: #aaa;">Copy these and add them in Multiplayer:
+            </div>
+
+            <div class="server-item" style="margin-bottom: 10px;">
+                <label style="display:block; font-size: 0.75rem; color: #3498db;">ArchMC (Popular)</label>
+                <div style="display:flex; gap: 5px;">
+                    <input type="text" value="wss://mc.arch.lol" readonly
+                        style="flex:1; background:#000; color:#0f0; border:1px solid #444; padding:5px; font-size: 0.8rem;">
+                    <button onclick="copyThis(this)"
+                        style="background:#3498db; color:#fff; border:none; padding:5px 10px; cursor:pointer; font-size: 0.7rem; border-radius: 4px;">Copy</button>
+                </div>
+            </div>
+
+            <div class="server-item" style="margin-bottom: 10px;">
+                <label style="display:block; font-size: 0.75rem; color: #3498db;">Aether (Survival)</label>
+                <div style="display:flex; gap: 5px;">
+                    <input type="text" value="wss://skeletonmc.eagler.host" readonly
+                        style="flex:1; background:#000; color:#0f0; border:1px solid #444; padding:5px; font-size: 0.8rem;">
+                    <button onclick="copyThis(this)"
+                        style="background:#3498db; color:#fff; border:none; padding:5px 10px; cursor:pointer; font-size: 0.7rem; border-radius: 4px;">Copy</button>
+                </div>
+            </div>
+
+            <div class="server-item" style="margin-bottom: 10px;">
+                <label style="display:block; font-size: 0.75rem; color: #3498db;">CMC (Anarchy)</label>
+                <div style="display:flex; gap: 5px;">
+                    <input type="text" value="wss://cmc.tf" readonly
+                        style="flex:1; background:#000; color:#0f0; border:1px solid #444; padding:5px; font-size: 0.8rem;">
+                    <button onclick="copyThis(this)"
+                        style="background:#3498db; color:#fff; border:none; padding:5px 10px; cursor:pointer; font-size: 0.7rem; border-radius: 4px;">Copy</button>
+                </div>
+            </div>
+
+            <p style="font-size: 0.7rem; color: #888; margin-top: 10px;">Note: 1.12.2 requires a compatible server for
+                the join button to work.</p>
         </div>
 
         <iframe id="gameFrame" title="Revision Module" style="width:100%; height:100vh; border:none;"></iframe>
@@ -238,15 +268,10 @@
             if (viewId === 'view-game') {
                 const frame = document.getElementById('gameFrame');
                 if (!frame.src || frame.src === "about:blank") {
-                    console.log("Decoding stealth game module...");
-                    fetch("assets/system_log.txt")
-                        .then(response => response.text())
-                        .then(base64 => {
-                            const html = atob(base64.trim());
-                            const blob = new Blob([html], { type: 'text/html' });
-                            const blobUrl = URL.createObjectURL(blob);
-                            frame.src = blobUrl;
-                        });
+                    console.log("Initializing Eaglercraft 1.12.2 High-Performance WASM Client...");
+                    // Using a stable, high-performance 1.12.2 deployment
+                    // This is much faster and more reliable than a single encoded HTML file
+                    frame.src = "https://eaglercraft.com/mc/1.12.2/";
                 }
                 setTimeout(() => frame.focus(), 500);
             }
@@ -293,13 +318,17 @@
             }, 1000);
         }
 
-        function copyServer() {
-            const copyText = document.getElementById("serverUrl");
-            copyText.select();
-            navigator.clipboard.writeText(copyText.value);
-            const btn = document.getElementById("copyBtn");
+        function copyThis(btn) {
+            const input = btn.previousElementSibling;
+            input.select();
+            navigator.clipboard.writeText(input.value);
+            const originalText = btn.innerText;
             btn.innerText = "COPIED!";
-            setTimeout(() => btn.innerText = "Copy Address", 2000);
+            btn.style.background = "#2ecc71";
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.background = "#3498db";
+            }, 2000);
         }
 
         function toggleHelper() {
