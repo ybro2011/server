@@ -268,9 +268,9 @@
             if (viewId === 'view-game') {
                 const frame = document.getElementById('gameFrame');
                 if (!frame.src || frame.src === "about:blank") {
-                    console.log("Initializing Eaglercraft 1.12.2 High-Performance WASM Client...");
-                    // Using a Githack mirror which allows iframing (avoids "Refused to connect")
-                    frame.src = "https://raw.githack.com/alexander-datskov/1.12-eaglercraftx/main/index.html";
+                    console.log("Initializing Local Eaglercraft 1.12.2 High-Performance Client...");
+                    // Loading the local offline file you downloaded!
+                    frame.src = "assets/game.html";
                 }
                 setTimeout(() => frame.focus(), 500);
             }
