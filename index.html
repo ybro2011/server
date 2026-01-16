@@ -269,9 +269,8 @@
                 const frame = document.getElementById('gameFrame');
                 if (!frame.src || frame.src === "about:blank") {
                     console.log("Initializing Eaglercraft 1.12.2 High-Performance WASM Client...");
-                    // Using a stable, high-performance 1.12.2 deployment
-                    // This is much faster and more reliable than a single encoded HTML file
-                    frame.src = "https://eaglercraft.com/mc/1.12.2/";
+                    // Using a Githack mirror which allows iframing (avoids "Refused to connect")
+                    frame.src = "https://raw.githack.com/alexander-datskov/1.12-eaglercraftx/main/index.html";
                 }
                 setTimeout(() => frame.focus(), 500);
             }
