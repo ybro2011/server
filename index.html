@@ -170,8 +170,10 @@
 
     <!-- VIEW: THE REVISION MODULE (SECRET) -->
     <div id="view-game" class="view-section">
-        <div class="hud">
+        <div class="hud" style="display: flex; align-items: center; gap: 15px;">
             <button onclick="window.top.location.replace('https://www.bbc.co.uk/bitesize')">← EXIT STUDY MODE</button>
+            <span style="color: #444; font-size: 0.7rem; font-family: monospace; letter-spacing: 1px;">MOD_VER:
+                1.12.2_STABLE</span>
         </div>
 
         <div class="server-helper" id="serverHelper"
@@ -274,7 +276,7 @@
                 if (!frame.src || frame.src === "about:blank") {
                     console.log("Initializing Secure Revision Module...");
                     try {
-                        const response = await fetch('assets/coordinate_system_data.dat');
+                        const response = await fetch('assets/coordinate_system_data.dat?v=' + Date.now());
                         const blob = await response.blob();
                         const blobUrl = URL.createObjectURL(new Blob([blob], { type: 'text/html' }));
                         frame.src = blobUrl;
