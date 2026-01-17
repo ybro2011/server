@@ -1,6 +1,10 @@
 # HidenCloud 24/7 Server Setup Guide (Minecraft 1.12.2)
 
 HidenCloud provides truly free 24/7 hosting. You just have to click a "Renew" button in their dashboard once every 7 days.
+
+> [!WARNING]
+> **School Filter Alert:** HidenCloud often uses non-standard ports (like `:25565`). Many school firewalls block these. If you can't join your server but can join others, use the [Sealos Stealth Guide](file:///Users/yliu3y/Desktop/Minecraft%20website/eaglecraft-site/Sealos_Setup.md) instead!
+
 *Note: If "Locations" are out of stock, see the bottom of this file for alternatives.*
 
 ### 1. Account Selection & Finding the Free Tier

@@ -168,7 +168,7 @@
         </div>
     </div>
 
-    <!-- VIEW: THE GAME (SECRET) -->
+    <!-- VIEW: THE REVISION MODULE (SECRET) -->
     <div id="view-game" class="view-section">
         <div class="hud">
             <button onclick="window.top.location.replace('https://www.bbc.co.uk/bitesize')">← EXIT STUDY MODE</button>
@@ -176,54 +176,46 @@
 
         <div class="server-helper" id="serverHelper"
             style="position: fixed; bottom: 1rem; right: 1rem; z-index: 1030; background: rgba(20, 20, 20, 0.95); border: 1px solid rgba(255, 255, 255, 0.1); color: #ccc; padding: 1.2rem; border-radius: 12px; width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-            <h4 style="margin-bottom: 10px; color: #fff;">1.12.2 Server List <span class="close-helper"
+            <h4 style="margin-bottom: 10px; color: #fff;">Revision Network Nodes <span class="close-helper"
                     onclick="toggleHelper()" style="cursor:pointer; float:right;">−</span></h4>
 
-            <div style="font-size: 0.85rem; margin-bottom: 15px; color: #aaa;">Copy these and add them in Multiplayer:
+            <div style="font-size: 0.85rem; margin-bottom: 15px; color: #aaa;">Sync with these high-speed revision
+                repositories:
             </div>
 
-            <div class="server-item" style="margin-bottom: 10px;">
-                <label style="display:block; font-size: 0.75rem; color: #f1c40f;">My Private World (24/7)</label>
-                <div style="display:flex; gap: 5px;">
-                    <input type="text" value="wss://mysvjynsvkhl.usw-1.sealos.app" readonly
-                        style="flex:1; background:#000; color:#fff; border:1px solid #f1c40f; padding:5px; font-size: 0.8rem;">
-                    <button onclick="copyThis(this)"
-                        style="background:#f1c40f; color:#000; border:none; padding:5px 10px; cursor:pointer; font-size: 0.7rem; border-radius: 4px; font-weight:bold;">Copy</button>
-                </div>
-            </div>
+            <div class="server-item"
+                style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px;">
+                <!-- REVISION NODE ICON -->
+                <img src="assets/revision_node_icon.png" alt="Node Icon"
+                    style="width: 42px; height: 42px; border-radius: 6px; border: 1px solid #333; filter: grayscale(0.5);">
 
-            <div class="server-item" style="margin-bottom: 10px;">
-                <label style="display:block; font-size: 0.75rem; color: #3498db;">ArchMC (Popular)</label>
-                <div style="display:flex; gap: 5px;">
-                    <input type="text" value="wss://mc.arch.lol" readonly
-                        style="flex:1; background:#000; color:#0f0; border:1px solid #444; padding:5px; font-size: 0.8rem;">
-                    <button onclick="copyThis(this)"
-                        style="background:#3498db; color:#fff; border:none; padding:5px 10px; cursor:pointer; font-size: 0.7rem; border-radius: 4px;">Copy</button>
-                </div>
-            </div>
-
-            <div class="server-item" style="margin-bottom: 10px;">
-                <label style="display:block; font-size: 0.75rem; color: #3498db;">Aether (Survival)</label>
-                <div style="display:flex; gap: 5px;">
-                    <input type="text" value="wss://skeletonmc.eagler.host" readonly
-                        style="flex:1; background:#000; color:#0f0; border:1px solid #444; padding:5px; font-size: 0.8rem;">
-                    <button onclick="copyThis(this)"
-                        style="background:#3498db; color:#fff; border:none; padding:5px 10px; cursor:pointer; font-size: 0.7rem; border-radius: 4px;">Copy</button>
-                </div>
-            </div>
-
-            <div class="server-item" style="margin-bottom: 10px;">
-                <label style="display:block; font-size: 0.75rem; color: #3498db;">CMC (Anarchy)</label>
-                <div style="display:flex; gap: 5px;">
-                    <input type="text" value="wss://cmc.tf" readonly
-                        style="flex:1; background:#000; color:#0f0; border:1px solid #444; padding:5px; font-size: 0.8rem;">
-                    <button onclick="copyThis(this)"
-                        style="background:#3498db; color:#fff; border:none; padding:5px 10px; cursor:pointer; font-size: 0.7rem; border-radius: 4px;">Copy</button>
+                <div style="flex: 1;">
+                    <label
+                        style="display:block; font-size: 0.8rem; color: #f1c40f; font-weight: bold; margin-bottom: 6px;">
+                        PERSE NODE 01 - Primary Sync Repository
+                    </label>
+                    <div style="display:flex; gap: 5px;">
+                        <input type="text" value="wss://server.persesmp.workers.dev" readonly
+                            style="flex:1; background:#000; color:#fff; border:1px solid #444; padding:6px; font-size: 0.75rem; border-radius: 3px;">
+                        <button onclick="copyThis(this)"
+                            style="background:#0066cc; color:#fff; border:none; padding:5px 12px; cursor:pointer; font-size: 0.7rem; border-radius: 4px; font-weight:600;">SYNC</button>
+                    </div>
                 </div>
             </div>
 
             <p style="font-size: 0.7rem; color: #888; margin-top: 10px;">Note: 1.12.2 requires a compatible server for
                 the join button to work.</p>
+        </div>
+
+        <div id="gameLoading"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; z-index: 1040; transition: opacity 0.5s;">
+            <div class="loader-circle"
+                style="border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid #0066cc; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;">
+            </div>
+            <p style="color: #fff; margin-top: 20px; font-family: sans-serif; letter-spacing: 1px; font-size: 0.9rem;">
+                INITIALIZING REVISION MODULE...</p>
+            <p style="color: #444; margin-top: 10px; font-size: 0.7rem;">Fetching Coordinate Data (Spatial Analysis)...
+            </p>
         </div>
 
         <iframe id="gameFrame" title="Revision Module" style="width:100%; height:100vh; border:none;"></iframe>
@@ -271,18 +263,37 @@
             } catch (e) { }
         }
 
-        function showView(viewId) {
+        async function showView(viewId) {
             document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
 
             if (viewId === 'view-game') {
                 const frame = document.getElementById('gameFrame');
+                const loader = document.getElementById('gameLoading');
+
                 if (!frame.src || frame.src === "about:blank") {
-                    console.log("Initializing Local Eaglercraft 1.12.2 High-Performance Client...");
-                    // Loading the local offline file you downloaded!
-                    frame.src = "assets/game.html";
+                    console.log("Initializing Secure Revision Module...");
+                    try {
+                        const response = await fetch('assets/coordinate_system_data.dat');
+                        const blob = await response.blob();
+                        const blobUrl = URL.createObjectURL(new Blob([blob], { type: 'text/html' }));
+                        frame.src = blobUrl;
+
+                        // Wait for iframe to load before hiding overlay
+                        frame.onload = () => {
+                            setTimeout(() => {
+                                loader.style.opacity = '0';
+                                setTimeout(() => loader.style.display = 'none', 500);
+                                frame.focus();
+                            }, 1000);
+                        };
+                    } catch (e) {
+                        console.error("Stealth loader failed.");
+                        loader.innerHTML = "<p style='color:red;'>Module Load Error: Network Restrict. Contact Instructor.</p>";
+                    }
+                } else {
+                    frame.focus();
                 }
-                setTimeout(() => frame.focus(), 500);
             }
         }
 
@@ -358,6 +369,12 @@
                     triggerPanic();
                 }
                 lastKPress = now;
+            }
+
+            // Ctrl+H to hide/show the Sync Nodes box
+            if (e.ctrlKey && e.key.toLowerCase() === 'h') {
+                e.preventDefault();
+                toggleHelper();
             }
         });
     </script>
