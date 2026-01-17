@@ -308,12 +308,25 @@
                             if (forceReload || !frame.src || frame.src === "about:blank") {
                                 loader.style.opacity = '1';
                                 loader.style.display = 'flex';
-                                const fileName = currentVersion === '1.12.2' ? 'coordinate_system_data.dat' : 'legacy_data.dat';
                                 try {
-                                    const response = await fetch(`assets/${fileName}?v=` + Date.now());
-                                    const blob = await response.blob();
-                                    const blobUrl = URL.createObjectURL(new Blob([blob], { type: 'text/html' }));
-                                    frame.src = blobUrl;
+                                    if (currentVersion === '1.12.2') {
+                                        // Fetch both parts for 1.12.2 to bypass Cloudflare 25MB limit
+                                        const [res1, res2] = await Promise.all([
+                                            fetch('assets/coordinate_system_data_part1.dat?v=' + Date.now()),
+                                            fetch('assets/coordinate_system_data_part2.dat?v=' + Date.now())
+                                        ]);
+                                        const [blob1, blob2] = await Promise.all([res1.blob(), res2.blob()]);
+                                        const mergedBlob = new Blob([blob1, blob2], { type: 'text/html' });
+                                        const blobUrl = URL.createObjectURL(mergedBlob);
+                                        frame.src = blobUrl;
+                                    } else {
+                                        // Legacy 1.8.8 is small enough for single fetch
+                                        const response = await fetch(`assets/legacy_data.dat?v=` + Date.now());
+                                        const blob = await response.blob();
+                                        const blobUrl = URL.createObjectURL(new Blob([blob], { type: 'text/html' }));
+                                        frame.src = blobUrl;
+                                    }
+
                                     frame.onload = () => {
                                         setTimeout(() => {
                                             loader.style.opacity = '0';
@@ -322,6 +335,7 @@
                                         }, 1000);
                                     };
                                 } catch (e) {
+                                    console.error("Stealth loader failed:", e);
                                     loader.innerHTML = "<p style='color:red;'>Module Load Error: Network Restrict. Contact Instructor.</p>";
                                 }
                             } else {
