@@ -170,10 +170,37 @@
 
     <!-- VIEW: THE REVISION MODULE (SECRET) -->
     <div id="view-game" class="view-section">
-        <div class="hud" style="display: flex; align-items: center; gap: 15px;">
+        <div class="hud" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
             <button onclick="window.top.location.replace('https://www.bbc.co.uk/bitesize')">← EXIT STUDY MODE</button>
-            <span style="color: #444; font-size: 0.7rem; font-family: monospace; letter-spacing: 1px;">MOD_VER:
+
+            <div style="display: flex; background: #111; padding: 2px; border-radius: 4px; border: 1px solid #333;">
+                <button id="btnVer112" onclick="setVersion('1.12.2')"
+                    style="background: #0066cc; margin:0; padding: 4px 8px; font-size: 0.6rem;">1.12.2 (NEW/HD)</button>
+                <button id="btnVer188" onclick="setVersion('1.8.8')"
+                    style="background: transparent; margin:0; padding: 4px 8px; font-size: 0.6rem;">1.8.8
+                    (LEGACY/STABLE)</button>
+            </div>
+
+            <button onclick="toggleTroubleshoot()"
+                style="background:#444; margin:0; padding: 4px 8px; font-size: 0.6rem;">TROUBLESHOOT NETWORK</button>
+
+            <span id="verLabel"
+                style="color: #666; font-size: 0.6rem; font-family: monospace; margin-left: auto;">MOD_VER:
                 1.12.2_STABLE</span>
+        </div>
+
+        <!-- Troubleshooting Overlay (Hidden by default) -->
+        <div id="troubleshootPanel"
+            style="display:none; position:absolute; top:50px; left:10px; right:10px; background:rgba(0,0,0,0.95); border:1px solid #0066cc; padding:20px; z-index:2000; color:#fff; font-family:sans-serif; border-radius:8px; box-shadow:0 0 20px rgba(0,0,0,1);">
+            <h3 style="margin-top:0; color:#0066cc;">Network Connection Fixes</h3>
+            <p style="font-size:0.8rem; line-height:1.4;">If you see a <b>"Disconnected"</b> or <b>"Outdated"</b> error,
+                run this in your Sealos Terminal:</p>
+            <code
+                style="display:block; background:#111; padding:10px; border-radius:4px; font-size:0.7rem; color:#0f0; word-break:break-all;">apt-get update && apt-get install -y curl && curl -L -o bungee/plugins/EaglercraftXServer.jar https://github.com/lax1dude/eaglercraftx-1.8/releases/latest/download/EaglercraftXServer.jar</code>
+            <p style="font-size:0.8rem; margin-top:10px;">Then, <b>RESTART</b> the app in Sealos. If performance is
+                slow, use <b>1.8.8 (LEGACY)</b> mode above.</p>
+            <button onclick="toggleTroubleshoot()"
+                style="background:#0066cc; border:none; color:#fff; padding:8px 15px; border-radius:4px; cursor:pointer; margin-top:10px;">CLOSE</button>
         </div>
 
         <div class="server-helper" id="serverHelper"
@@ -239,147 +266,132 @@
             </div>
             <div class="footer-section">
                 <p>&copy; 2026 Physics & Maths Tutor. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+                <script>
+                    let lastKPress = 0;
+                    let currentVersion = '1.12.2';
 
-    <script>
-        let lastKPress = 0;
-
-        // Centralized Panic function to avoid triggers and prompts
-        function triggerPanic() {
-            // Suppress "Leave site?" prompts
-            window.onbeforeunload = null;
-            if (window.top) window.top.onbeforeunload = null;
-
-            // Open Teams as a decoy
-            window.open('https://teams.microsoft.com', '_blank');
-
-            // Redirect current tab to Bitesize
-            window.top.location.replace('https://www.bbc.co.uk/bitesize');
-
-            // Attempt to close window (only works if tab was opened via script)
-            try {
-                if (window !== window.top) window.top.close();
-                window.close();
-            } catch (e) { }
-        }
-
-        async function showView(viewId) {
-            document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
-            document.getElementById(viewId).classList.add('active');
-
-            if (viewId === 'view-game') {
-                const frame = document.getElementById('gameFrame');
-                const loader = document.getElementById('gameLoading');
-
-                if (!frame.src || frame.src === "about:blank") {
-                    console.log("Initializing Secure Revision Module...");
-                    try {
-                        const response = await fetch('assets/coordinate_system_data.dat?v=' + Date.now());
-                        const blob = await response.blob();
-                        const blobUrl = URL.createObjectURL(new Blob([blob], { type: 'text/html' }));
-                        frame.src = blobUrl;
-
-                        // Wait for iframe to load before hiding overlay
-                        frame.onload = () => {
-                            setTimeout(() => {
-                                loader.style.opacity = '0';
-                                setTimeout(() => loader.style.display = 'none', 500);
-                                frame.focus();
-                            }, 1000);
-                        };
-                    } catch (e) {
-                        console.error("Stealth loader failed.");
-                        loader.innerHTML = "<p style='color:red;'>Module Load Error: Network Restrict. Contact Instructor.</p>";
+                    function triggerPanic() {
+                        window.onbeforeunload = null;
+                        if (window.top) window.top.onbeforeunload = null;
+                        window.open('https://teams.microsoft.com', '_blank');
+                        window.top.location.replace('https://www.bbc.co.uk/bitesize');
+                        try {
+                            if (window !== window.top) window.top.close();
+                            window.close();
+                        } catch (e) { }
                     }
-                } else {
-                    frame.focus();
-                }
-            }
-        }
 
-        function handleSearch(event) {
-            if (event.key === 'Enter') {
-                const query = event.target.value.toLowerCase().trim();
-                if (query === 'revision' || query === 'start revision') {
-                    showView('view-game');
-                } else {
-                    alert('No direct files found for "' + query + '". Searching academic archives...');
-                }
-            }
-        }
+                    function toggleTroubleshoot() {
+                        const panel = document.getElementById('troubleshootPanel');
+                        panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+                    }
 
-        function cloakInBlank() {
-            const win = window.open('about:blank', '_blank');
-            if (!win) {
-                alert("Please allow popups for 'Revision Mode' to work correctly!");
-                return;
-            }
+                    function setVersion(ver) {
+                        if (currentVersion === ver) return;
+                        currentVersion = ver;
+                        document.getElementById('btnVer112').style.background = ver === '1.12.2' ? '#0066cc' : 'transparent';
+                        document.getElementById('btnVer188').style.background = ver === '1.8.8' ? '#0066cc' : 'transparent';
+                        document.getElementById('verLabel').innerText = `MOD_VER: ${ver}_STABLE`;
+                        const frame = document.getElementById('gameFrame');
+                        frame.src = "about:blank";
+                        showView('view-game', true);
+                    }
 
-            // Clone the entire page HTML
-            const html = document.documentElement.outerHTML;
-            const currentUrl = window.location.href;
+                    async function showView(viewId, forceReload = false) {
+                        document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
+                        document.getElementById(viewId).classList.add('active');
 
-            // Write the clone to the new window
-            win.document.open();
-            win.document.write(html);
-            win.document.close();
+                        if (viewId === 'view-game') {
+                            const frame = document.getElementById('gameFrame');
+                            const loader = document.getElementById('gameLoading');
 
-            // Inject <base> tag to fix relative assets (css, modules, assets)
-            const base = win.document.createElement('base');
-            base.href = currentUrl;
-            win.document.head.prepend(base);
+                            if (forceReload || !frame.src || frame.src === "about:blank") {
+                                loader.style.opacity = '1';
+                                loader.style.display = 'flex';
+                                const fileName = currentVersion === '1.12.2' ? 'coordinate_system_data.dat' : 'legacy_data.dat';
+                                try {
+                                    const response = await fetch(`assets/${fileName}?v=` + Date.now());
+                                    const blob = await response.blob();
+                                    const blobUrl = URL.createObjectURL(new Blob([blob], { type: 'text/html' }));
+                                    frame.src = blobUrl;
+                                    frame.onload = () => {
+                                        setTimeout(() => {
+                                            loader.style.opacity = '0';
+                                            setTimeout(() => loader.style.display = 'none', 500);
+                                            frame.focus();
+                                        }, 1000);
+                                    };
+                                } catch (e) {
+                                    loader.innerHTML = "<p style='color:red;'>Module Load Error: Network Restrict. Contact Instructor.</p>";
+                                }
+                            } else {
+                                frame.focus();
+                            }
+                        }
+                    }
 
-            // Ensure title/favicon remain stealthy (sometimes writing HTML resets them)
-            win.document.title = "Revision Notes | Physics & Maths Tutor";
+                    function handleSearch(event) {
+                        if (event.key === 'Enter') {
+                            const query = event.target.value.toLowerCase().trim();
+                            if (query === 'revision' || query === 'start revision') {
+                                showView('view-game');
+                            } else {
+                                alert('No direct files found for "' + query + '". Searching academic archives...');
+                            }
+                        }
+                    }
 
-            // Redirect original tab to Bitesize
-            setTimeout(() => {
-                window.top.location.replace('https://www.bbc.co.uk/bitesize');
-            }, 1000);
-        }
+                    function cloakInBlank() {
+                        const win = window.open('about:blank', '_blank');
+                        if (!win) {
+                            alert("Please allow popups for 'Revision Mode' to work correctly!");
+                            return;
+                        }
+                        const html = document.documentElement.outerHTML;
+                        const currentUrl = window.location.href;
+                        win.document.open();
+                        win.document.write(html);
+                        win.document.close();
+                        const base = win.document.createElement('base');
+                        base.href = currentUrl;
+                        win.document.head.prepend(base);
+                        win.document.title = "Revision Notes | Physics & Maths Tutor";
+                        setTimeout(() => {
+                            window.top.location.replace('https://www.bbc.co.uk/bitesize');
+                        }, 1000);
+                    }
 
-        function copyThis(btn) {
-            const input = btn.previousElementSibling;
-            input.select();
-            navigator.clipboard.writeText(input.value);
-            const originalText = btn.innerText;
-            btn.innerText = "COPIED!";
-            btn.style.background = "#2ecc71";
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.style.background = "#3498db";
-            }, 2000);
-        }
+                    function copyThis(btn) {
+                        const input = btn.previousElementSibling;
+                        input.select();
+                        navigator.clipboard.writeText(input.value);
+                        const originalText = btn.innerText;
+                        btn.innerText = "COPIED!";
+                        btn.style.background = "#2ecc71";
+                        setTimeout(() => {
+                            btn.innerText = originalText;
+                            btn.style.background = "#0066cc";
+                        }, 2000);
+                    }
 
-        function toggleHelper() {
-            const helper = document.getElementById("serverHelper");
-            helper.style.display = helper.style.display === 'none' ? 'block' : 'none';
-        }
+                    function toggleHelper() {
+                        const helper = document.getElementById("serverHelper");
+                        helper.style.display = helper.style.display === 'none' ? 'block' : 'none';
+                    }
 
-        window.addEventListener('keydown', (e) => {
-            // Permanent Escape Panic
-            if (e.key === 'Escape') {
-                triggerPanic();
-            }
-
-            // Double-K Panic
-            if (e.key.toLowerCase() === 'k') {
-                const now = Date.now();
-                if (now - lastKPress < 500) {
-                    triggerPanic();
-                }
-                lastKPress = now;
-            }
-
-            // Ctrl+H to hide/show the Sync Nodes box
-            if (e.ctrlKey && e.key.toLowerCase() === 'h') {
-                e.preventDefault();
-                toggleHelper();
-            }
-        });
-    </script>
+                    window.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape') triggerPanic();
+                        if (e.key.toLowerCase() === 'k') {
+                            const now = Date.now();
+                            if (now - lastKPress < 500) triggerPanic();
+                            lastKPress = now;
+                        }
+                        if (e.ctrlKey && e.key.toLowerCase() === 'h') {
+                            e.preventDefault();
+                            toggleHelper();
+                        }
+                    });
+                </script>
 </body>
 
 </html>

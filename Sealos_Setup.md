@@ -1,28 +1,27 @@
-# Sealos "Stealth" Server Setup (Manual Method)
+# Sealos Official "One-Click" Setup 🚀
 
-If your last server gave a "503 Error", it's usually because the port was wrong. Follow these **exact** steps for a fresh start.
+Since you originally used the official code, the **Sealos App Store** is the best and easiest way to get your server back online!
+
+### 1. The Easy Deployment
+1.  Go to your **Sealos Desktop**.
+2.  Open the **App Store** (Rainbow icon).
+3.  Search for **"Eaglercraft"**.
+4.  Click on the Eaglercraft template and hit **"Deploy"**.
+    *   *This automatically sets up everything (server + plugins).*
+
+### 2. Tweak for Performance (Ghost Mode)
+Once deployed, click on your new app in the **App Launchpad** to verify:
+1.  **CPU:** `1 Core`
+2.  **Memory:** `2 Gi` (Crucial for 1.12.2 support!)
+3.  **Port:** Ensure **5200** is public (this is your wss:// link).
+
+### 3. Sync with Website
+*   Copy your **Public URL** (it looks like `xxxxxxxx.usw-1.sealos.app`).
+*   Go to your website, click the **SYNC** button, and paste your URL.
+*   The website will automatically add `:443` and connect you!
 
 > [!TIP]
-> **Blocked at School?** If this works at home but is "Refused to Connect" at school, the school has blocked the Sealos domain. [Follow the School Bypass Guide here.](file:///Users/yliu3y/Desktop/Minecraft%20website/eaglecraft-site/School_Bypass_Guide.md)
-
-### 1. Open App Launchpad
-1. Log in to [Sealos.io](https://sealos.io/).
-2. Click **App Launchpad** (Rocket ship).
-3. Click **"Create App"**.
-
-### 2. Configure the "Revision Module"
-1.  **App Name:** `persesmp` (Lowercase only!)
-2.  **Docker Image:** `ghcr.io/yangchuansheng/eaglerx1.8server:1.12.1`
-    *   *Note: This is the updated version for "Ghost Mode".*
-3.  **CPU:** Min: `1 Core`
-4.  **Memory:** Min: `2 Gi` (Crucial for 1.12.2, or it will crash!)
-5.  **Container Port:** `5200`
-    *   *Ensure the "Public Access" switch is **ON**.*
-
-### 3. Enable Stealth Access (Port 443)
-1. Select **"Public"**.
-2. **External Port:** Sealos will automatically set this to **443** when you use the public URL. 
-3. You should see your URL appearing (e.g., `xxxx.sealos.run`).
+> If it says "Outdated Server", use the **TROUBLESHOOT** button on the website—it has a one-line command to fix the plugins in 5 seconds!
 
 ### 4. Storage (Important!)
 1. Click **"Add Volume"**.
