@@ -32,11 +32,29 @@ Netlify uses `nifty-site-name.netlify.app`.
 2.  **Drag & Drop** your folder into their "Deploy" area.
 3.  Change the site name to something like `advanced-mathematics-pmt`.
 
-### 5. Render.com (The New Frontier)
-Render is newer and often completely overlooked by library/school filters.
-1.  Create a "Static Site" on [Render.com](https://render.com).
-2.  Connect your GitHub.
-3.  The domain will be `yoursite.onrender.com`.
+
+---
+
+## 🎮 Free 24/7 Server Hosting (Eaglercraft Ready)
+If you don't want to pay for Sealos or HidenCloud, try these reliable "Forever Free" options.
+
+### 1. Eagler.Host (Best Specialized)
+This is built **specifically** for Eaglercraft.
+1.  Go to [Eagler.Host](https://topeaglerservers.com/eaglerhost).
+2.  It offers one-click setup for Eaglercraft servers with built-in WebSocket support.
+3.  **Pros:** No complex plugins needed. It just works.
+
+### 2. FalixNodes (High Performance)
+A very popular free host with high-spec hardware.
+1.  Go to [FalixNodes.net](https://falixnodes.net/).
+2.  Choose **Paper 1.12.2**.
+3.  **Required:** You MUST upload the [EaglercraftXServer.jar](https://github.com/lax1dude/eaglercraftx-1.8/releases/latest/download/EaglercraftXServer.jar) plugin to your `plugins` folder.
+
+### 3. Oracle Cloud Free Tier (The "Gold Standard")
+If you can get it, this is the best server in the world for free.
+1.  Go to [Oracle Cloud Free Tier](https://www.oracle.com/cloud/free/).
+2.  **Resources:** 4 ARM CPUs and 24GB of RAM (unbeatable).
+3.  **The Catch:** Requires a Credit/Debit card for verification (even though it's free).
 
 ---
 

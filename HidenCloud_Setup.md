@@ -14,12 +14,29 @@ HidenCloud provides truly free 24/7 hosting. You just have to click a "Renew" bu
 4. Click on **"Free"** and then **"Minecraft"**. 
    - *Do NOT click the "Lite", "Standard", or "Performance" buttons at the top, as those cost money.*
 
-### 2. Create the Server
+### 2. Create the "Java" Server
+Eaglercraft runs a standard **Java** Minecraft server, but bridges it to the browser.
 1. Click **"Order Now"** on the Free Minecraft plan.
-2. **Location:** Select any available (e.g., Europe or North America).
+2. **Location:** Select any available.
 3. **Software:** Select **Minecraft Java** -> **Paper** or **Spigot**.
 4. **Version:** Select **1.12.2**.
-5. Click **"Check Out"** (It should show €0.00).
+5. **CRITICAL Settings:** In the **Startup** tab, ensure your **Java Version** is set to **Java 17** (The Eaglercraft plugin requires modern Java to run, even on 1.12.2).
+6. Click **"Check Out"** (Total: €0.00).
+
+---
+
+### 💎 Best Value: Paid Plan Comparison
+If you are willing to pay a few dollars, here is why **HidenCloud** wins over Sealos:
+
+| Feature | Sealos (Optimized) | **HidenCloud (Standard)** |
+| :--- | :--- | :--- |
+| **Monthly Cost** | ~$15 - $20 | **~$5.50 (€4.99)** |
+| **RAM (Memory)** | 2 Gi - 4 Gi | **4 Gi (DDR5)** |
+| **CPU Cores** | 1 Core | **2 Cores (EPYC)** |
+| **Verdict** | Good, but expensive. | **Best value for 1.12.2!** |
+
+> [!TIP]
+> **Pick the "Standard" Plan (€4.99/mo).** It has exactly the strength you need to run 1.12.2 without lag, and it costs 3x less than Sealos!
 
 ### 3. Server Configuration (CRITICAL)
 1. Go to the **File Manager** in your HidenCloud panel.
@@ -30,7 +47,7 @@ HidenCloud provides truly free 24/7 hosting. You just have to click a "Renew" bu
 ### 4. Install Eaglercraft Support
 1. Go to the **Plugins** tab (or upload to the `plugins` folder).
 2. Look for **EaglercraftXServer** (for 1.12.2).
-3. If it's not in the list, download it from [here](https://github.com/lax1dude/eaglercraftx-1.12/releases) and upload it to the `plugins` folder.
+3. If it's not in the list, download it from [here](https://github.com/lax1dude/eaglerxserver/releases/download/v1.0.8/EaglerXServer.jar) and upload it to the `plugins` folder.
 4. **Restart** the server.
 
 ### 5. Get your WSS Address
