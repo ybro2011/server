@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics & Maths Tutor | Revision Notes & Past Papers</title>
+    <title>RevisionTutor | Premier Revision Notes & Past Papers</title>
     <meta name="description"
-        content="Physics & Maths Tutor provides high quality revision notes, past papers and model solutions for GCSE and A-level subjects.">
+        content="RevisionTutor provides high quality revision notes, past papers and model solutions for GCSE and A-level subjects.">
     <meta name="keywords"
         content="revision, notes, past papers, physics, maths, tutor, educational games, learning resources">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -349,62 +349,6 @@
             z-index: 2000;
         }
 
-        /* Auth */
-        #authOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 37, 64, 0.95);
-            z-index: 5000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(8px);
-        }
-
-        .auth-box {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .auth-box h2 {
-            margin-bottom: 12px;
-            font-size: 24px;
-        }
-
-        .auth-box p {
-            margin-bottom: 24px;
-            font-size: 15px;
-            color: #666;
-        }
-
-        .auth-box input {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 16px;
-            text-align: center;
-        }
-
-        .auth-box button {
-            width: 100%;
-            padding: 14px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-        }
 
         /* Helper & Panels */
         #troubleshootPanel {
@@ -436,26 +380,13 @@
 
 <body>
 
-    <!-- AUTH OVERLAY -->
-    <div id="authOverlay">
-        <div class="auth-box">
-            <h2>Access Restricted</h2>
-            <p>Please enter your institutional Revision Code to unlock advanced study modules.</p>
-            <input type="password" id="authInput" placeholder="Enter Code"
-                onkeydown="if(event.key==='Enter') verifyAuth()">
-            <button onclick="verifyAuth()">Unlock Module</button>
-            <p id="authError" style="color: #ff4d4d; font-size: 13px; margin-top: 16px; display: none;">Invalid Code.
-                Please contact your department head.</p>
-        </div>
-    </div>
-
     <!-- HEADER -->
     <header>
         <div class="container">
             <nav>
                 <a href="javascript:void(0)" onclick="showView('view-home')" class="logo-box">
-                    <div class="logo-icon">A</div>
-                    <span class="logo-text">Apex Revision</span>
+                    <div class="logo-icon">R</div>
+                    <span class="logo-text">RevisionTutor</span>
                 </a>
 
                 <ul class="nav-links">
@@ -473,7 +404,7 @@
     <div id="view-home" class="view-section active">
         <section class="hero">
             <div class="container">
-                <h1>Master Your Exams with Apex</h1>
+                <h1>Master Your Exams with RevisionTutor</h1>
                 <p>The UK's leading platform for high-quality revision notes, exam-style questions, and step-by-step
                     solutions for A-Level and GCSE.</p>
                 <div class="search-hero">
@@ -660,8 +591,8 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="logo-box" style="margin-bottom: 24px;">
-                        <div class="logo-icon" style="background: white; color: var(--primary);">A</div>
-                        <span class="logo-text" style="color: white;">Apex Revision</span>
+                        <div class="logo-icon" style="background: white; color: var(--primary);">R</div>
+                        <span class="logo-text" style="color: white;">RevisionTutor</span>
                     </div>
                     <p style="color: rgba(255,255,255,0.5); font-size: 14px;">Elevating GCSE and A-Level revision for
                         the modern student.</p>
@@ -689,7 +620,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2026 Apex Revision Platform. All rights reserved.
+                &copy; 2026 RevisionTutor Platform. All rights reserved.
             </div>
         </div>
     </footer>
@@ -708,7 +639,7 @@
                 win.document.write(html);
                 win.document.close();
 
-                win.document.title = "Revision Notes | Apex Revision Platform";
+                win.document.title = "Revision Notes | RevisionTutor Platform";
                 window.location.replace('https://teams.microsoft.com');
                 return true;
             }
@@ -747,35 +678,8 @@
             return;
         }
 
-        const AUTH_CODE = "2026"; // Change this to your desired password
-        let isAuthorized = false;
-        let authPendingAction = null;
-
-        function verifyAuth() {
-            const input = document.getElementById('authInput');
-            const error = document.getElementById('authError');
-            if (input.value === AUTH_CODE) {
-                isAuthorized = true;
-                document.getElementById('authOverlay').style.display = 'none';
-                if (authPendingAction) {
-                    authPendingAction();
-                    authPendingAction = null;
-                }
-            } else {
-                error.style.display = 'block';
-                input.value = '';
-                input.focus();
-            }
-        }
 
         async function showView(viewId, forceReload = false) {
-            if (viewId === 'view-game' && !isAuthorized) {
-                authPendingAction = () => showView(viewId, forceReload);
-                document.getElementById('authOverlay').style.display = 'flex';
-                document.getElementById('authInput').focus();
-                return;
-            }
-
             document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
 
@@ -826,12 +730,6 @@
         }
 
         function cloakInBlank() {
-            if (!isAuthorized) {
-                authPendingAction = () => cloakInBlank();
-                document.getElementById('authOverlay').style.display = 'flex';
-                document.getElementById('authInput').focus();
-                return;
-            }
             const win = window.open('about:blank', '_blank');
             if (!win) {
                 alert("Please allow popups for 'Revision Mode' to work correctly!");
@@ -845,7 +743,7 @@
             const base = win.document.createElement('base');
             base.href = currentUrl;
             win.document.head.prepend(base);
-            win.document.title = "Revision Notes | Physics & Maths Tutor";
+            win.document.title = "Revision Notes | RevisionTutor Platform";
             setTimeout(() => {
                 window.top.location.replace('https://www.bbc.co.uk/bitesize');
             }, 1000);
