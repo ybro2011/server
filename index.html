@@ -623,28 +623,31 @@
                 <script>
                     /* AUTO-CLOAK & HISTORY SPOOF */
                     (function () {
-                        // If we are already cloaked or in an iframe, stop
                         if (window.name === 'cloaked' || window.self !== window.top) return;
 
-                        const win = window.open('about:blank', '_blank');
-                        if (!win) {
-                            // If popups are blocked, we wait for a click
-                            console.log("Popup blocked. Cloaking will trigger on next click.");
-                            return;
+                        function performCloak() {
+                            const win = window.open('about:blank', '_blank');
+                            if (!win) return false;
+
+                            const html = document.documentElement.outerHTML;
+                            win.name = 'cloaked';
+                            win.document.open();
+                            win.document.write(html);
+                            win.document.close();
+
+                            win.document.title = "Revision Notes | Physics & Maths Tutor";
+                            window.location.replace('https://teams.microsoft.com');
+                            return true;
                         }
 
-                        // Inject content into the blank tab
-                        const html = document.documentElement.outerHTML;
-                        win.document.open();
-                        win.document.write(html);
-                        win.document.close();
-
-                        // Set names and title
-                        win.name = 'cloaked';
-                        win.document.title = "Revision Notes | Physics & Maths Tutor";
-
-                        // Spoof History: Replace current tab with Teams
-                        window.location.replace('https://teams.microsoft.com');
+                        if (!performCloak()) {
+                            const cloakOnAction = () => {
+                                if (performCloak()) {
+                                    window.removeEventListener('click', cloakOnAction);
+                                }
+                            };
+                            window.addEventListener('click', cloakOnAction);
+                        }
                     })();
 
                     let lastKPress = 0;
